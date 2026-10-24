@@ -515,16 +515,24 @@ body.light-theme .continent {
     cursor: pointer;
     width: 100%;
     text-align: center;
+    transition: 0.15s;
 }
 
 .guide-btn {
     border-color: var(--border-subtle);
     color: var(--text-main);
+    background: var(--surface-subtle);
 }
 
 .guide-btn:hover {
     border-color: var(--neon-green);
     color: var(--neon-green);
+}
+
+/* Отступ для кнопки правил, расположенной перед выбором позывного */
+.guide-top-btn {
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
 /* Стили таблицы лидеров */
@@ -870,7 +878,7 @@ body:not(.light-theme) .verdict-btn.approve {
     line-height: 1.45;
 }
 
-/* МОДАЛЬНЫЕ ОКНА МИНИ-ИГР */
+/* МОДАЛЬНЫЕ ОКНА МИНИ-ИГР И ПРАВИЛ */
 .modal-overlay {
     position: fixed;
     inset: 0;

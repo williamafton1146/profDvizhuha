@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>profДвижуха — Протокол КиберБазы 67</title>
 
-    <!-- ВСТРОЕННАЯ ПИКСЕЛЬНАЯ ИКОНКА САЙТА (FAVICON) ДЛЯ ВКЛАДКИ -->
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'><rect width='16' height='16' fill='%23090d0b'/><path d='M0 0h16v16H0V0zm1 1v14h14V1H1z' fill='%239eff36'/><path d='M4 3h6v2h2v3h-2v2H6v3H4V3zm2 2v3h4V5H6z' fill='%239eff36'/></svg>">
-    <link rel="alternate icon" type="image/png" href="/icon.png?v=67">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,12 +16,10 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- БИБЛИОТЕКА ДЛЯ ГЕНЕРАЦИИ И СОХРАНЕНИЯ СЕРТИФИКАТА В PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 
 <body>
-    <!-- АУДИОПЛЕЕРЫ АТМОСФЕРНЫХ САУНДОВ -->
     <audio id="snd-menu" src="audio/menu.mp3" preload="auto" loop></audio>
     <audio id="snd-easy" src="audio/easy.mp3" preload="auto" loop></audio>
     <audio id="snd-medium" src="audio/medium.mp3" preload="auto" loop></audio>
@@ -37,7 +33,6 @@
     </div>
 
     <header class="top-bar">
-        <!-- КЛИКАБЕЛЬНЫЙ ЛОГОТИП (ВОЗВРАТ НА ГЛАВНУЮ) -->
         <div class="brand" id="btn-brand-home" title="На главную страницу">
             <span class="brand-box">P</span>
             <span class="brand-name">profДВИЖУХА</span>
@@ -46,7 +41,6 @@
             <span class="status-dot"></span>
             <span id="header-status-text">СИСТЕМА АКТИВНА // ZOV-67</span>
         </div>
-        <!-- КНОПКИ УПРАВЛЕНИЯ СВЕРХУ -->
         <div class="top-actions">
             <span class="coords">47.214862°N 39.704961°E</span>
             <button id="btn-open-leaderboard" class="top-ctrl-btn">🏆 РЕЙТИНГ</button>
@@ -56,7 +50,6 @@
     </header>
 
     <main class="viewport">
-        <!-- СТАРТОВОЕ МЕНЮ -->
         <section id="screen-start" class="screen active">
             <div class="proto-label">ПРОТОКОЛ ПРОФОРИЕНТАЦИИ / V.67 // РОССИЯ • ПУТИН • ПОБЕДА</div>
             <h1 class="pixel-hero">
@@ -72,6 +65,10 @@
             <div class="terminal-box start-config">
                 <span class="corner tl"></span><span class="corner tr"></span>
                 <span class="corner bl"></span><span class="corner br"></span>
+
+                <button id="btn-open-guide" class="outline-btn guide-btn guide-top-btn">
+                    <span>📘 ИНСТРУКЦИЯ ОПЕРАТОРА</span>
+                </button>
 
                 <div class="input-group">
                     <label for="player-callsign">ТВОЙ ПОЗЫВНОЙ В СИСТЕМЕ:</label>
@@ -126,16 +123,12 @@
                     <button id="btn-continue-game" class="outline-btn hidden">
                         <span>ВОССТАНОВИТЬ СЕССИЮ</span>
                     </button>
-                    <button id="btn-open-guide" class="outline-btn guide-btn">
-                        <span>📘 ИНСТРУКЦИЯ ОПЕРАТОРА</span>
-                    </button>
                 </div>
 
                 <div class="time-hint">ВРЕМЯ НОРМЫ: 67С // СЛОЖНОГО: 30С</div>
             </div>
         </section>
 
-        <!-- ЭКРАН ГЕЙМПЛЕЯ -->
         <section id="screen-game" class="screen">
             <div class="game-layout">
                 <aside class="progress-sidebar">
@@ -231,7 +224,6 @@
             </div>
         </section>
 
-        <!-- МОДАЛЬНОЕ ОКНО: ТАБЛИЦА ЛИДЕРОВ -->
         <div id="modal-leaderboard" class="modal-overlay hidden">
             <div class="terminal-box ddos-box" style="text-align: left; max-width: 500px;">
                 <span class="corner tl"></span><span class="corner tr"></span>
@@ -253,7 +245,6 @@
             </div>
         </div>
 
-        <!-- МОДАЛЬНОЕ ОКНО: ИНСТРУКЦИЯ ОПЕРАТОРА (С ОПИСАНИЕМ СКАНЕРОВ) -->
         <div id="modal-guide" class="modal-overlay hidden">
             <div class="terminal-box ddos-box" style="text-align: left; max-width: 600px;">
                 <span class="corner tl"></span><span class="corner tr"></span>
@@ -284,7 +275,6 @@
             </div>
         </div>
 
-        <!-- МОДАЛЬНЫЕ ОКНА МИНИ-ИГР -->
         <div id="modal-ddos" class="modal-overlay hidden">
             <div class="terminal-box ddos-box">
                 <span class="corner tl"></span><span class="corner tr"></span>
@@ -298,7 +288,6 @@
             </div>
         </div>
 
-        <!-- УПРОЩЕННЫЙ СЕЙФ: 2 ЦИФРЫ И 10 ПОПЫТОК -->
         <div id="modal-brute" class="modal-overlay hidden">
             <div class="terminal-box ddos-box">
                 <span class="corner tl"></span><span class="corner tr"></span>
@@ -342,16 +331,13 @@
             </div>
         </div>
 
-        <!-- ФИНАЛЬНЫЙ ЭКРАН / СЕРТИФИКАТ -->
         <section id="screen-result" class="screen">
-            <!-- ОБЁРТКА ДЛЯ ПОЛНОГО ЭКСПОРТА В PDF БЕЗ ОБРЕЗКИ -->
             <div id="certificate-export-wrap" class="cert-export-wrap">
                 <div class="cert-status-top">
                     <span class="status-dot"></span>
                     <span id="cert-top-status-text">ПРОТОКОЛ УСПЕШНО ЗАВЕРШЁН</span>
                 </div>
 
-                <!-- БЛОК СЕРТИФИКАТА -->
                 <div class="terminal-box cert-card" id="certificate-card">
                     <span class="corner tl"></span><span class="corner tr"></span>
                     <span class="corner bl"></span><span class="corner br"></span>
@@ -426,13 +412,11 @@
                 </div>
             </div>
 
-            <!-- ПОДСКАЗКА, ЕСЛИ ПРОЙДЕНО НА УРОВНЕ "НОВИЧОК 67" -->
             <div id="cert-easy-notice" class="cert-notice hidden">
                 ℹ️ Именной PDF-сертификат выдаётся при прохождении сложностей <strong>«Оператор ZOV»</strong> и
                 <strong>«Легенда Гойды»</strong> (в режимах «Классика» или «Марафон»).
             </div>
 
-            <!-- КНОПКИ ПОД СЕРТИФИКАТОМ -->
             <div class="cert-actions-bar">
                 <button id="btn-restart" class="cert-back-btn">
                     ← ПРОЙТИ ЕЩЁ РАЗ
