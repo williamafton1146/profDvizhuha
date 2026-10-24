@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profДвижуха — Протокол КиберБазы 67</title>
+
+    <!-- ВСТРОЕННАЯ ПИКСЕЛЬНАЯ ИКОНКА САЙТА (FAVICON) ДЛЯ ВКЛАДКИ -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'><rect width='16' height='16' fill='%23090d0b'/><path d='M0 0h16v16H0V0zm1 1v14h14V1H1z' fill='%239eff36'/><path d='M4 3h6v2h2v3h-2v2H6v3H4V3zm2 2v3h4V5H6z' fill='%239eff36'/></svg>">
+    <link rel="alternate icon" type="image/png" href="/icon.png?v=67">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- БИБЛИОТЕКА ДЛЯ ГЕНЕРАЦИИ И СОХРАНЕНИЯ СЕРТИФИКАТА В PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+    <!-- АУДИОПЛЕЕРЫ АТМОСФЕРНЫХ САУНДОВ -->
+    <audio id="snd-menu" src="audio/menu.mp3" preload="auto" loop></audio>
+    <audio id="snd-easy" src="audio/easy.mp3" preload="auto" loop></audio>
+    <audio id="snd-medium" src="audio/medium.mp3" preload="auto" loop></audio>
+    <audio id="snd-hard" src="audio/hard.mp3" preload="auto" loop></audio>
+    <audio id="snd-finish" src="audio/finish.mp3" preload="auto"></audio>
+
+    <div class="bg-grid"></div>
+    <div class="bg-globe">
+        <div class="continent c-1"></div>
+        <div class="continent c-2"></div>
+    </div>
+
+    <header class="top-bar">
+        <!-- КЛИКАБЕЛЬНЫЙ ЛОГОТИП (ВОЗВРАТ НА ГЛАВНУЮ) -->
+        <div class="brand" id="btn-brand-home" title="На главную страницу">
+            <span class="brand-box">P</span>
+            <span class="brand-name">profДВИЖУХА</span>
+        </div>
+        <div class="sys-status">
+            <span class="status-dot"></span>
+            <span id="header-status-text">СИСТЕМА АКТИВНА // ZOV-67</span>
+        </div>
+        <!-- КНОПКИ УПРАВЛЕНИЯ СВЕРХУ -->
+        <div class="top-actions">
+            <span class="coords">47.214862°N 39.704961°E</span>
+            <button id="btn-open-leaderboard" class="top-ctrl-btn">🏆 РЕЙТИНГ</button>
+            <button id="btn-sound-toggle" class="top-ctrl-btn">🔊 SOUND: ON</button>
+            <button id="btn-theme-toggle" class="top-ctrl-btn">☀ СВЕТЛАЯ</button>
+        </div>
+    </header>
+
+    <main class="viewport">
+        <!-- СТАРТОВОЕ МЕНЮ -->
+        <section id="screen-start" class="screen active">
+            <div class="proto-label">ПРОТОКОЛ ПРОФОРИЕНТАЦИИ / V.67 // РОССИЯ • ПУТИН • ПОБЕДА</div>
+            <h1 class="pixel-hero">
+                КТО ТЫ<br>
+                <span class="neon-text">В ЭТОЙ</span><br>
+                ДВИЖУХЕ?
+            </h1>
+            <p class="hero-subtitle">
+                Симулятор SOC-инженера. 50 вариаций заданий, случайные ивенты, атмосферные саунды и защита активов
+                банка!
+            </p>
+
+            <div class="terminal-box start-config">
+                <span class="corner tl"></span><span class="corner tr"></span>
+                <span class="corner bl"></span><span class="corner br"></span>
+
+                <div class="input-group">
+                    <label for="player-callsign">ТВОЙ ПОЗЫВНОЙ В СИСТЕМЕ:</label>
+                    <input type="text" id="player-callsign" value="67zov" maxlength="20"
+                        placeholder="Введи позывной...">
+                </div>
+
+                <div class="input-group">
+                    <label>РЕЖИМ ПРОХОЖДЕНИЯ СМЕНЫ:</label>
+                    <div class="mode-selector" id="mode-selector">
+                        <button class="mode-btn active" data-mode="standard">⚡ Классика (5 заданий + 2
+                            интерактива)</button>
+                        <button class="mode-btn" data-mode="marathon">🔥 Марафон (50 заданий + 5 интерактивов)</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>УРОВЕНЬ СЛОЖНОСТИ ВАХТЫ:</label>
+                    <div class="diff-grid" id="difficulty-selector">
+                        <div class="diff-card selected" data-diff="easy">
+                            <div class="diff-num">01</div>
+                            <div class="diff-info">
+                                <strong>Новичок 67</strong>
+                                <span>Без таймера + подсказки Наставника</span>
+                            </div>
+                            <div class="diff-check"></div>
+                        </div>
+                        <div class="diff-card" data-diff="medium">
+                            <div class="diff-num">02</div>
+                            <div class="diff-info">
+                                <strong>Оператор ZOV</strong>
+                                <span>67 сек на сводку, стандарт (🏅 Сертификат PDF)</span>
+                            </div>
+                            <div class="diff-check"></div>
+                        </div>
+                        <div class="diff-card" data-diff="hard">
+                            <div class="diff-num">03</div>
+                            <div class="diff-info">
+                                <strong>Легенда Гойды</strong>
+                                <span>30 сек на сводку, хардкор (🏅 Сертификат PDF)</span>
+                            </div>
+                            <div class="diff-check"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="start-actions">
+                    <button id="btn-start-game" class="neon-btn">
+                        <span>ЗАПУСТИТЬ ДВИЖУХУ</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                    <button id="btn-continue-game" class="outline-btn hidden">
+                        <span>ВОССТАНОВИТЬ СЕССИЮ</span>
+                    </button>
+                    <button id="btn-open-guide" class="outline-btn guide-btn">
+                        <span>📘 ИНСТРУКЦИЯ ОПЕРАТОРА</span>
+                    </button>
+                </div>
+
+                <div class="time-hint">ВРЕМЯ НОРМЫ: 67С // СЛОЖНОГО: 30С</div>
+            </div>
+        </section>
+
+        <!-- ЭКРАН ГЕЙМПЛЕЯ -->
+        <section id="screen-game" class="screen">
+            <div class="game-layout">
+                <aside class="progress-sidebar">
+                    <div class="prog-title" id="prog-title-label">ПРОГРЕСС СМЕНЫ</div>
+                    <div class="prog-digits" id="prog-digits">01<span>/</span>05</div>
+                    <div class="prog-bars" id="prog-bars">
+                        <span class="bar active"></span><span class="bar"></span><span class="bar"></span><span
+                            class="bar"></span><span class="bar"></span>
+                    </div>
+
+                    <div class="hud-stats">
+                        <div class="hud-pill">👤 Позывной: <strong id="hud-name">67zov</strong></div>
+                        <div class="hud-pill">⚙️ Сложность: <strong id="hud-diff">Новичок 67</strong></div>
+                        <div class="hud-pill">⭐ Репутация: <strong id="hud-rep" class="neon-text">100</strong></div>
+                    </div>
+                </aside>
+
+                <div class="terminal-box main-workstation" id="workstation-top">
+                    <span class="corner tl"></span><span class="corner tr"></span>
+                    <span class="corner bl"></span><span class="corner br"></span>
+
+                    <div class="scenario-header">
+                        <div class="scenario-tag">
+                            <span class="status-dot"></span>
+                            <span id="case-code">СЦЕНАРИЙ 01 // ZOV-67-01</span>
+                        </div>
+                        <div id="case-timer" class="timer-badge">⏱ Без лимита</div>
+                    </div>
+
+                    <h2 id="case-headline" class="pixel-subhead">Загрузка оперативной сводки...</h2>
+
+                    <div class="workstation-grid">
+                        <div class="dossier-col">
+                            <div class="mentor-card">
+                                <div class="mentor-avatar">Z67</div>
+                                <div class="mentor-body">
+                                    <div class="mentor-name">Командир Василиса Базова // Штаб КиберДвижухи</div>
+                                    <p id="mentor-text">Изучи сводку. Россия, Путин, Победа — работаем четко!</p>
+                                </div>
+                            </div>
+
+                            <div class="data-table">
+                                <div class="data-row"><span class="data-label">Тип движухи:</span><span class="data-val"
+                                        id="d-type">—</span></div>
+                                <div class="data-row"><span class="data-label">Субъект / Отправитель:</span><span
+                                        class="data-val" id="d-sender">—</span></div>
+                                <div class="data-row"><span class="data-label">Ресурс / Объект:</span><span
+                                        class="data-val" id="d-amount">—</span></div>
+                                <div class="data-row"><span class="data-label">Узел / Локация:</span><span
+                                        class="data-val mono-hl" id="d-ip">—</span></div>
+                                <div class="data-row"><span class="data-label">Суть оперативки:</span><span
+                                        class="data-val" id="d-desc">—</span></div>
+                            </div>
+
+                            <div id="debrief-box" class="debrief-box hidden">
+                                <div class="debrief-label">ПРОФ-РАЗБОР ПОЛЕТОВ (БАЗА 67):</div>
+                                <h4 id="debrief-title">Верное решение!</h4>
+                                <p id="debrief-text"></p>
+                                <button id="btn-next-case" class="neon-btn full-width">
+                                    <span>СЛЕДУЮЩАЯ СВОДКА</span>
+                                    <span class="btn-icon">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="tools-col">
+                            <div class="tools-title">🔍 СКАНЕРЫ РАЗВЕДКИ (НАЖМИ ДЛЯ СБОРА УЛИК):</div>
+                            <div class="scanner-buttons">
+                                <button class="scan-btn" data-tool="geo"
+                                    title="Проверка IP-адреса и геолокации узла"><span class="scan-num">01</span> 🌐
+                                    ZOV-Радар</button>
+                                <button class="scan-btn" data-tool="tech"
+                                    title="Сканирование кода и подписей транзакции"><span class="scan-num">02</span> 🛡️
+                                    Код-Детектор</button>
+                                <button class="scan-btn" data-tool="psy"
+                                    title="Анализ психотипа и поведенческих аномалий"><span class="scan-num">03</span>
+                                    🧠 Анти-Скуф</button>
+                            </div>
+
+                            <div class="console-window" id="console-log">
+                                <div class="log-line">&gt; Инициализация генератора вариаций...</div>
+                            </div>
+
+                            <div class="verdict-label">ВЫБЕРИ ОПЕРАТИВНЫЙ ВЕРДИКТ:</div>
+                            <div class="verdict-grid">
+                                <button class="verdict-btn approve" data-verdict="approve">✓ ОДОБРИТЬ</button>
+                                <button class="verdict-btn verify" data-verdict="verify">📞 ДОП. ПРОЗВОН</button>
+                                <button class="verdict-btn block" data-verdict="block">⛔ БЛОКИРОВАТЬ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- МОДАЛЬНОЕ ОКНО: ТАБЛИЦА ЛИДЕРОВ -->
+        <div id="modal-leaderboard" class="modal-overlay hidden">
+            <div class="terminal-box ddos-box" style="text-align: left; max-width: 500px;">
+                <span class="corner tl"></span><span class="corner tr"></span>
+                <span class="corner bl"></span><span class="corner br"></span>
+                <div class="ddos-alert-tag">🏆 ДОСКА ПОЧЕТА БАЗЫ 67</div>
+                <h2 class="pixel-subhead" style="font-size: 14px; margin-bottom: 12px;">Топ операторов системы</h2>
+                <div class="lb-table" style="max-height: 250px; overflow-y: auto; margin-bottom: 20px;">
+                    <div class="lb-header-row">
+                        <span>ПОЗЫВНОЙ</span>
+                        <span>РЕЖИМ</span>
+                        <span>РЕПУТАЦИЯ</span>
+                    </div>
+                    <div id="modal-leaderboard-rows">
+                        <div class="lb-row"><span>Загрузка базы данных...</span><span>—</span><span>—</span></div>
+                    </div>
+                </div>
+                <button id="btn-close-leaderboard" class="neon-btn" style="justify-content: center;">ЗАКРЫТЬ
+                    РЕЙТИНГ</button>
+            </div>
+        </div>
+
+        <!-- МОДАЛЬНОЕ ОКНО: ИНСТРУКЦИЯ ОПЕРАТОРА (С ОПИСАНИЕМ СКАНЕРОВ) -->
+        <div id="modal-guide" class="modal-overlay hidden">
+            <div class="terminal-box ddos-box" style="text-align: left; max-width: 600px;">
+                <span class="corner tl"></span><span class="corner tr"></span>
+                <span class="corner bl"></span><span class="corner br"></span>
+                <div class="ddos-alert-tag">📘 УЧЕБНЫЙ ПРОТОКОЛ ОПЕРАТОРА SOC</div>
+                <h2 class="pixel-subhead" style="font-size: 14px; margin-bottom: 12px;">Как играть и побеждать в
+                    «profДвижуха»</h2>
+                <div
+                    style="font-size: 12px; line-height: 1.6; color: var(--text-main); display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                    <p><strong>Шаг 1. Анализ сводки:</strong> Внимательно изучите параметры инцидента (отправитель,
+                        IP-адрес, суть запроса).</p>
+                    <p><strong>Шаг 2. Разведка улик (Сканеры):</strong></p>
+                    <ul style="padding-left: 20px; color: var(--neon-green);">
+                        <li>🌐 <strong>ZOV-Радар:</strong> Проверяет геолокацию узла, IP-адрес и подлинность маршрута
+                            запроса.</li>
+                        <li>🛡️ <strong>Код-Детектор:</strong> Анализирует цифровую подпись, структуру кода или
+                            сертификаты безопасности.</li>
+                        <li>🧠 <strong>Анти-Скуф:</strong> Проверяет поведенческие паттерны, психологический профиль
+                            отправителя на предмет социальной инженерии и мошенничества.</li>
+                    </ul>
+                    <p><strong>Шаг 3. Вердикт:</strong> Примите решение — Одобрить транзакцию, сделать Доп. прозвон
+                        клиенту или Блокировать мошенника.</p>
+                    <p>🏅 <strong>Сертификат PDF:</strong> Пройдите смену на уровне сложности <strong>«Оператор
+                            ZOV»</strong> или <strong>«Легенда Гойды»</strong> в любом режиме, чтобы получить именной
+                        сертификат и скачать его в формате <code>.pdf</code>!</p>
+                </div>
+                <button id="btn-close-guide" class="neon-btn" style="justify-content: center;">ПОНЯТНО, В БОЙ!</button>
+            </div>
+        </div>
+
+        <!-- МОДАЛЬНЫЕ ОКНА МИНИ-ИГР -->
+        <div id="modal-ddos" class="modal-overlay hidden">
+            <div class="terminal-box ddos-box">
+                <span class="corner tl"></span><span class="corner tr"></span>
+                <span class="corner bl"></span><span class="corner br"></span>
+                <div class="ddos-alert-tag">⚡ ЭКСТРЕННАЯ ДВИЖУХА: DDOS-АТАКА НА ШЛЮЗ!</div>
+                <h2 class="pixel-subhead">Перехват враждебного трафика!</h2>
+                <p class="ddos-desc">Изолируй <span class="danger-text">зараженные серверы</span> ZOV-фаерволом!</p>
+                <div class="ddos-status">Обезврежено: <strong id="ddos-score">0 / 8</strong> | Время: <strong
+                        id="ddos-timer">12с</strong></div>
+                <div class="nodes-grid" id="nodes-grid"></div>
+            </div>
+        </div>
+
+        <!-- УПРОЩЕННЫЙ СЕЙФ: 2 ЦИФРЫ И 10 ПОПЫТОК -->
+        <div id="modal-brute" class="modal-overlay hidden">
+            <div class="terminal-box ddos-box">
+                <span class="corner tl"></span><span class="corner tr"></span>
+                <span class="corner bl"></span><span class="corner br"></span>
+                <div class="ddos-alert-tag">🔓 ТРЕВОГА: ПОПЫТКА ВЗЛОМА БАЗЫ ДАННЫХ!</div>
+                <h2 class="pixel-subhead">Подбор аварийного кода дешифратора</h2>
+                <p class="ddos-desc">Угадай 2-значный код доступа (цифры от 1 до 9).</p>
+                <div class="brute-display" id="brute-code-display">_ _</div>
+                <div class="brute-hint-box" id="brute-hint">Введите первую цифру кода...</div>
+                <div class="brute-pad" id="brute-keypad"></div>
+                <div class="ddos-status" style="margin-top: 14px;">Осталось попыток: <strong
+                        id="brute-tries">10</strong> | Время: <strong id="brute-timer">45с</strong></div>
+            </div>
+        </div>
+
+        <div id="modal-deepfake" class="modal-overlay hidden">
+            <div class="terminal-box ddos-box">
+                <span class="corner tl"></span><span class="corner tr"></span>
+                <span class="corner bl"></span><span class="corner br"></span>
+                <div class="ddos-alert-tag">🧬 ВНИМАНИЕ: СИСТЕМА ДИПФЕЙК-КОНТРОЛЯ!</div>
+                <h2 class="pixel-subhead">Найди и заблокируй ИИ-подделку потока</h2>
+                <p class="ddos-desc">Выбери тот видеопоток, который является <span class="danger-text">нейросетевым
+                        дипфейком</span>!</p>
+                <div class="deepfake-grid" id="deepfake-grid"></div>
+                <div class="ddos-status" style="margin-top: 14px;">Время на анализ: <strong id="df-timer">25с</strong>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-trace" class="modal-overlay hidden">
+            <div class="terminal-box ddos-box">
+                <span class="corner tl"></span><span class="corner tr"></span>
+                <span class="corner bl"></span><span class="corner br"></span>
+                <div class="ddos-alert-tag">🌐 ОБНАРУЖЕН СКРЫТЫЙ ПРОКСИ-ШПИОН!</div>
+                <h2 class="pixel-subhead">Трассировка сетевого узла атак</h2>
+                <p class="ddos-desc">Соедини узлы по порядку от <span class="neon-text">Узла-1</span> до <span
+                        class="neon-text">Узла-4</span>!</p>
+                <div class="trace-nodes-grid" id="trace-grid"></div>
+                <div class="ddos-status" style="margin-top: 14px;">Шаг трассировки: <strong id="trace-step">1 /
+                        4</strong> | Время: <strong id="trace-timer">12с</strong></div>
+            </div>
+        </div>
+
+        <!-- ФИНАЛЬНЫЙ ЭКРАН / СЕРТИФИКАТ -->
+        <section id="screen-result" class="screen">
+            <!-- ОБЁРТКА ДЛЯ ПОЛНОГО ЭКСПОРТА В PDF БЕЗ ОБРЕЗКИ -->
+            <div id="certificate-export-wrap" class="cert-export-wrap">
+                <div class="cert-status-top">
+                    <span class="status-dot"></span>
+                    <span id="cert-top-status-text">ПРОТОКОЛ УСПЕШНО ЗАВЕРШЁН</span>
+                </div>
+
+                <!-- БЛОК СЕРТИФИКАТА -->
+                <div class="terminal-box cert-card" id="certificate-card">
+                    <span class="corner tl"></span><span class="corner tr"></span>
+                    <span class="corner bl"></span><span class="corner br"></span>
+
+                    <div class="cert-meta-row">
+                        <span id="cert-meta-left">PROFДВИЖУХА // КЛАССИКА</span>
+                        <span id="cert-meta-right"># OPERATIVE_67</span>
+                    </div>
+
+                    <div class="cert-small-label" id="cert-doc-type">СЕРТИФИКАТ</div>
+                    <h1 class="cert-main-title">ИГРА ПРОЙДЕНА</h1>
+
+                    <div class="cert-confirm-label">НАСТОЯЩИМ ПОДТВЕРЖДАЕТСЯ, ЧТО</div>
+
+                    <div class="cert-player-banner">
+                        <span id="res-badge">ИГРОК 67ZOV</span>
+                    </div>
+
+                    <div class="cert-sub-accomplish" id="cert-accomplish-line">
+                        завершил протокол профориентации и разблокировал цифровой профиль
+                    </div>
+
+                    <div class="cert-class-box">
+                        <div class="cert-class-caption">ПРИСВОЕННЫЙ КЛАСС</div>
+                        <div class="cert-class-title" id="res-rank">СТРАТЕГ БАЗЫ 67</div>
+                    </div>
+
+                    <p class="result-summary" id="res-desc">
+                        Ты превращаешь хаос кибератак в чёткую систему защиты. Твоя суперсила — хладнокровный анализ
+                        улик и молниеносная реакция.
+                    </p>
+
+                    <div class="stats-frame">
+                        <div class="stat-row">
+                            <span class="stat-name">ЛОГИКА (67)</span>
+                            <div class="seg-bar" id="bar-logic"></div>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-name">ТОЧНОСТЬ (ZOV)</span>
+                            <div class="seg-bar" id="bar-acc"></div>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-name">ВОЛЯ К ПОБЕДЕ</span>
+                            <div class="seg-bar" id="bar-will"></div>
+                        </div>
+                    </div>
+
+                    <div class="cert-summary-metrics">
+                        <span>РЕПУТАЦИЯ: <strong id="res-rep" class="neon-text">225</strong></span>
+                        <span>•</span>
+                        <span>УСПЕШНЫХ СВОДОК: <strong id="res-correct">5 из 5</strong></span>
+                        <span>•</span>
+                        <span>ВАХТА: <strong id="res-diff-label">Оператор ZOV</strong></span>
+                    </div>
+
+                    <div class="cert-stamp-wrap">
+                        <div class="cert-stamp">
+                            <span>P</span>
+                        </div>
+                    </div>
+
+                    <div class="cert-footer-sign">
+                        <div class="cert-sign-col left">
+                            <strong id="cert-date">24.10.2026</strong>
+                            <span>ДАТА СЕРТИФИКАТА</span>
+                        </div>
+                        <div class="cert-sign-col right">
+                            <strong>PROFДВИЖУХА // ZOV-67</strong>
+                            <span>ЦИФРОВАЯ ПОДПИСЬ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ПОДСКАЗКА, ЕСЛИ ПРОЙДЕНО НА УРОВНЕ "НОВИЧОК 67" -->
+            <div id="cert-easy-notice" class="cert-notice hidden">
+                ℹ️ Именной PDF-сертификат выдаётся при прохождении сложностей <strong>«Оператор ZOV»</strong> и
+                <strong>«Легенда Гойды»</strong> (в режимах «Классика» или «Марафон»).
+            </div>
+
+            <!-- КНОПКИ ПОД СЕРТИФИКАТОМ -->
+            <div class="cert-actions-bar">
+                <button id="btn-restart" class="cert-back-btn">
+                    ← ПРОЙТИ ЕЩЁ РАЗ
+                </button>
+                <button id="btn-download-pdf" class="neon-btn cert-save-btn">
+                    <span>СОХРАНИТЬ СЕРТИФИКАТ (.PDF)</span>
+                    <span class="btn-icon">↓</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast-achievement" class="toast hidden">
+        <div class="toast-icon">🏆</div>
+        <div class="toast-content">
+            <div class="toast-title" id="toast-title">Ачивка открыта!</div>
+            <div class="toast-desc" id="toast-desc">Описание</div>
+        </div>
+    </div>
+
+    <footer class="bottom-bar">
+        <div>© 2026 profДВИЖУХА // ПРОТОКОЛ 67-ZOV</div>
+    </footer>
+
+    <script src="js/scenarios.js"></script>
+    <script src="js/engine.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+[
+  {
+    "callsign": "67zov",
+    "difficulty": "Новичок 67",
+    "reputation": 225,
+    "correct_cases": 5
+  },
+  {
+    "callsign": "инвест",
+    "difficulty": "Новичок 67",
+    "reputation": 225,
+    "correct_cases": 5
+  },
+  {
+    "callsign": "67zov",
+    "difficulty": "Новичок 67 (Классика)",
+    "reputation": 200,
+    "correct_cases": 5
+  },
+  {
+    "callsign": "67zov",
+    "difficulty": "Оператор ZOV (Классика)",
+    "reputation": 200,
+    "correct_cases": 5
+  },
+  {
+    "callsign": "67zov",
+    "difficulty": "Новичок 67",
+    "reputation": 195,
+    "correct_cases": 4
+  },
+  {
+    "callsign": "67zov",
+    "difficulty": "Новичок 67",
+    "reputation": 180,
+    "correct_cases": 4
+  },
+  {
+    "callsign": "67zov",
+    "difficulty": "Новичок 67 (Классика)",
+    "reputation": 160,
+    "correct_cases": 2
+  },
+  {
+    "callsign": "67zov",
+    "difficulty": "Легенда Гойды (Классика)",
+    "reputation": 135,
+    "correct_cases": 3
+  },
+  {
+    "callsign": "67zov",
+    "difficulty": "Оператор ZOV (Классика)",
+    "reputation": 110,
+    "correct_cases": 1
+  },
+  {
+    "callsign": "67zov",
+    "difficulty": "Оператор ZOV (Классика)",
+    "reputation": 75,
+    "correct_cases": 0
+  }
+]
